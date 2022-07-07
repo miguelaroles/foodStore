@@ -1,3 +1,7 @@
-<div class="row menu-wrapper">
-  <div class="col-12 menu-item" *ngFor="let categorie of categories">{{ categorie.name }}</div>
-</div>
+<app-tab
+  (tabEvent)="listenChildEvent($event)"
+  *ngFor="let category of categories; let i = index"
+  [category]="category"
+  [index]="i"
+  [active]="tab === i"
+></app-tab>

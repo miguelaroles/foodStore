@@ -1,7 +1,12 @@
 <div class="row item-wrapper">
-  <div class="col-2 item" *ngFor="let item of items">
-    <img [src]="item.image" class="image" alt="placeholder">
-    <div class="item-value">{{ item.name }}</div>
-    <div class="item-price {{ item.price | color }}">{{ item.price | currency:'CHF' }}</div>
-  </div>
+  <h1 class="col-12 title">{{ title }}</h1>
+  <span
+    class="col-4 col-12-xs col-3-md col-2-lg item item-container"
+    *ngFor="let item of items"
+    [class]="{
+    active: forms.value.items | objectContains : item.title
+  }"
+  >
+    <app-item (itemEvent)="listenChildEvent($event)" [item]="item"></app-item>
+  </span>
 </div>

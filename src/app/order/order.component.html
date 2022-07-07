@@ -1,3 +1,15 @@
 <footer>
-  <b>Order : </b> <em class="price">{{ price }} CHF</em> <button class="pull-right order-button button {{ price | color }}">Order</button>
+  <hr/>
+  <em
+    class="price">{{
+      price | stripToCurrency |
+      currency:'CHF ':'symbol':'1.2-2'
+    }}
+  </em>
+  <button
+    class="pull-right order-button button {{ price | color }}"
+    type="submit"
+  >
+    Order
+  </button>
 </footer>

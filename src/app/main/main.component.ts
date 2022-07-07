@@ -1,4 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormGroup} from "@angular/forms";
+
 
 @Component({
   selector: 'app-main',
@@ -9,9 +11,14 @@ export class MainComponent implements OnInit {
 
   constructor() { }
 
+  @Input() public title!: string;
   @Input() public items!: any[];
+  @Input() public forms!: FormGroup;
+  @Output() itemEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  listenChildEvent($event: string) {
+    this.itemEvent.emit($event);
   }
-
 }

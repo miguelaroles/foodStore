@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-order',
@@ -9,7 +9,7 @@ export class OrderComponent implements OnInit {
 
   constructor() { }
 
-  public price : number = 34.0;
+  @Input() public price!: number;
 
   ngOnInit(): void {
   }

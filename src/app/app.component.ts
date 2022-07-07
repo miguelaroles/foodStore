@@ -1,112 +1,73 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import data from "src/assets/files/resto-data.json";
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+
+// console.log(data);
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  public title: string = 'FoodStore';
+export class AppComponent implements OnInit {
 
-  public items: any[] = [
-    {
-      id: 1,
-      name: 'Item 1',
-      image: '/assets/images/placeholder.png',
-      price: 20,
-    },
-    {
-      id: 2,
-      name: 'Item 2',
-      image: '/assets/images/placeholder.png',
-      price: 12,
-    },
-    {
-      id: 3,
-      name: 'Item 3',
-      image: '/assets/images/placeholder.png',
-      price: -14,
-    },
-    {
-      id: 4,
-      name: 'Item 4',
-      image: '/assets/images/placeholder.png',
-      price: 17,
-    },
-    {
-      id: 5,
-      name: 'Item 5',
-      image: '/assets/images/placeholder.png',
-      price: 42,
-    },
-    {
-      id: 6,
-      name: 'Item 6',
-      image: '/assets/images/placeholder.png',
-      price: -5,
-    },
-    {
-      id: 1,
-      name: 'Item 7',
-      image: '/assets/images/placeholder.png',
-      price: 20.5,
-    },
-    {
-      id: 2,
-      name: 'Item 8',
-      image: '/assets/images/placeholder.png',
-      price: -10.45,
-    },
-    {
-      id: 3,
-      name: 'Item 9',
-      image: '/assets/images/placeholder.png',
-      price: 3.75,
-    },
-    {
-      id: 4,
-      name: 'Item 10',
-      image: '/assets/images/placeholder.png',
-      price: 20,
-    },
-    {
-      id: 5,
-      name: 'Item 11',
-      image: '/assets/images/placeholder.png',
-      price: 28.35,
-    },
-    {
-      id: 6,
-      name: 'Item 12',
-      image: '/assets/images/placeholder.png',
-      price: -14.55,
-    }
-  ];
+  @Input() public price: number = 0;
 
-  public categories: any[] = [
-    {
-      id: 1,
-      name: 'Categorie 1',
-    },
-    {
-      id: 2,
-      name: 'Categorie 2',
-    },
-    {
-      id: 3,
-      name: 'Categorie 3',
-    },
-    {
-      id: 4,
-      name: 'Categorie 4',
-    },
-    {
-      id: 5,
-      name: 'Categorie 5',
-    },
-    {
-      id: 6,
-      name: 'Categorie 6',
-    },
-  ];
+  public title: string = data.title;
+
+  public items: any[] = [];
+
+  public categories: any[] = data.data;
+
+  public tab: number = 0;
+
+  public forms!: FormGroup;
+
+  private itemsAlreadyExist(
+    items: {
+      name: string;
+      quantity: number;}[],
+    name: string): (boolean | {name: string; quantity:number;})
+  {
+    return items.find((item: { name: string;quantity: number}) => item.name === name) || false;
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  listenChildEvent($event: string) {
+    const item: any = this.categories[this.tab].recipes.find((recipe: any) => recipe.uuid === $event);
+    const itemName: string = item.title;
+    const itemPrice: number = item.price;
+    const itemQuantity = 1;
+    const formControlPrice = this.forms.get('price') as FormControl;
+    const formControlItems = this.forms.get('items') as FormArray;
+    const currentPrice = formControlPrice.value;
+    // console.log("// test //", formControlItems);
+
+    formControlItems.push(new FormGroup({
+      name: new FormControl(itemName),
+      quantity: new FormControl(itemQuantity),
+    }));
+    formControlPrice.setValue(currentPrice + (itemQuantity * itemPrice));
+    this.price = formControlPrice.value;
+  }
+
+  listenChildTabEvent($event: number) {
+    this.tab = $event;
+  }
+
+  initForm(): void {
+    this.forms = new FormGroup<any>({
+      price: new FormControl(0, Validators.compose([Validators.required])),
+      items: new FormArray([])
+    });
+  }
+
+  onSubmitForm (): void {
+    // console.log('// Form //', this.forms.value);
+    alert(JSON.stringify(this.forms.value));
+    this.forms.reset();
+  }
 }

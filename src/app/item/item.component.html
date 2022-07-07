@@ -1,0 +1,16 @@
+<div
+  (click)="emitEvent()"
+>
+  <div class="image-container">
+    <img [src]="item.imageUrl | imageUrl" class="image" alt="placeholder">
+  </div>
+  <div class="item-value">{{ item.title }}</div>
+  <div class="item-description">{{ item.description }}</div>
+  <div class="item-price {{ item.price | color }}">
+    {{
+      item.price |
+      stripToCurrency |
+      currency:'CHF ':'symbol':'1.2-2'
+    }}
+  </div>
+</div>

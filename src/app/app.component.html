@@ -1,13 +1,25 @@
-<main class="row wrapper">
-  <section class="col-2">
-    <app-navbar [categories]="categories"></app-navbar>
-  </section>
-  <section class="col-10">
-    <div class="main-wrapper">
-      <app-main [items]="items"></app-main>
-    </div>
-    <div class="order-wrapper">
-      <app-order></app-order>
-    </div>
-  </section>
+<main>
+  <form [formGroup]="forms" (ngSubmit)="onSubmitForm()" class="row wrapper">
+    <section class="col-3 col-2-md col-2-lg">
+      <app-navbar
+        (tabEvent)="listenChildTabEvent($event)"
+        [tab]="tab"
+        [categories]="categories"
+      ></app-navbar>
+    </section>
+    <section class="col-9 col-10-md col-10-lg">
+      <div [ngSwitch]="tab" class="main-wrapper">
+        <app-main
+          *ngSwitchCase="tab"
+          (itemEvent)="listenChildEvent($event)"
+          [items]="categories[tab].recipes"
+          [title]="categories[tab].title"
+          [forms]="forms"
+        ></app-main>
+      </div>
+      <div class="order-wrapper">
+        <app-order [price]="price"></app-order>
+      </div>
+    </section>
+  </form>
 </main>

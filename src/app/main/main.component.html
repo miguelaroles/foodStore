@@ -2,5 +2,6 @@
   <div class="col-2 item" *ngFor="let item of items">
     <img [src]="item.image" class="image" alt="placeholder">
     <div class="item-value">{{ item.name }}</div>
+    <div class="item-price {{ item.price | color }}">{{ item.price | currency:'CHF' }}</div>
   </div>
 </div>

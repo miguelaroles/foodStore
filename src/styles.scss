@@ -29,6 +29,15 @@
         text-align: center;
         color: rgba(0,0,0,0.2);
       }
+      .item-price {
+        text-align: center;
+        color: rgba(0,0,0,1);
+        font-weight: bold;
+      }
+
+      .item-price.error {
+        color: #FF0000;
+      }
     }
   };
   .menu-wrapper {
@@ -43,6 +52,10 @@
     padding:0;
     .order-button {
       margin-left: 1em;
+    }
+    .price {
+      font-size: 1.5em;
+      font-weight: bold;
     }
   };
   .negative {

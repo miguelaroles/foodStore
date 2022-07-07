@@ -9,6 +9,8 @@ export class OrderComponent implements OnInit {
 
   constructor() { }
 
+  public price : number = 34.0;
+
   ngOnInit(): void {
   }
 

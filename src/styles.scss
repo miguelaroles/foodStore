@@ -1,1 +1,52 @@
+/* Chota ui override */
+:root {
+  --color-primary: #1565c0; /* brand color */
+}
+
 /* You can add global styles to this file, and also import other style files */
+.wrapper {
+  min-height: calc(100vh - 0.5em);
+  position: relative;
+  margin: 0;
+  padding:0;
+  .main-wrapper {
+    min-height: 90%;
+    margin: 0;
+    padding:0;
+    .item-wrapper {
+      padding: 1em;
+      .item {
+        padding: 1em;
+        margin: 1em;
+        border: 1px solid #eeeeee;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .item:hover {
+        background-color: rgba(0,0,0,0.03);
+      }
+      .item-value {
+        text-align: center;
+        color: rgba(0,0,0,0.2);
+      }
+    }
+  };
+  .menu-wrapper {
+    margin: 1em 0;
+    .menu-item {
+      padding: 1em;
+    }
+  }
+  .order-wrapper{
+    min-height: 10%;
+    margin: 0;
+    padding:0;
+    .order-button {
+      margin-left: 1em;
+    }
+  };
+  .negative {
+    background-color: #ff867c;
+    color: #000063;
+  }
+}

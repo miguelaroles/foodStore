@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainComponent } from './main/main.component';
 import { OrderComponent } from './order/order.component';
+import { ColorPipe } from './pipes/color/color.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     MainComponent,
-    OrderComponent
+    OrderComponent,
+    ColorPipe
   ],
   imports: [
     BrowserModule,

@@ -36,6 +36,12 @@ export class AppComponent implements OnInit {
     this.initForm();
   }
 
+  handleFormReset(): void {
+    this.forms.reset();
+    this.price = 0;
+    this.tab = 0;
+  }
+
   listenChildEvent($event: string) {
     const item: any = this.categories[this.tab].recipes.find((recipe: any) => recipe.uuid === $event);
     const itemName: string = item.title;
@@ -68,6 +74,6 @@ export class AppComponent implements OnInit {
   onSubmitForm (): void {
     // console.log('// Form //', this.forms.value);
     alert(JSON.stringify(this.forms.value));
-    this.forms.reset();
+    this.handleFormReset();
   }
 }

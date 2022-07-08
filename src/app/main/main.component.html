@@ -1,5 +1,5 @@
 <div class="row item-wrapper">
-  <h1 class="col-12 title">{{ title }}</h1>
+  <h2 class="col-12 title">{{ title }}</h2>
   <span
     class="col-4 col-12-xs col-3-md col-2-lg item item-container"
     *ngFor="let item of items"
@@ -7,6 +7,11 @@
     active: forms.value.items | objectContains : item.title
   }"
   >
-    <app-item (itemEvent)="listenChildEvent($event)" [item]="item"></app-item>
+    <app-item
+      (itemEvent)="listenChildEvent($event)"
+      (minusEvent)="listenMinusEvent($event)"
+      [item]="item"
+      [forms]="forms"
+    ></app-item>
   </span>
 </div>

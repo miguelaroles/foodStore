@@ -9,6 +9,13 @@
   position: relative;
   margin: 0;
   padding:0;
+  .app-title {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 0.4em;
+  }
   .main-wrapper {
     /*min-height: 90%;*/
     max-height: calc(100vh - 9em);
@@ -19,6 +26,49 @@
     overflow-x: hidden;
     .item-wrapper {
       padding: 1em;
+      position: relative;
+      .item-container-inner {
+        position: relative;
+        height: 100%;
+        .count-wrapper {
+          max-width: 100%;
+          margin: 0;
+        }
+        .count {
+          text-align: center;
+          font-weight: bold;
+        }
+        .increment {
+          position: relative;
+          padding: 0;
+          text-align: center;
+          border-radius: 50%;
+          img {
+            position: relative;
+            height: 24px;
+            width: 24px;
+            max-width: none;
+            max-height: none;
+            z-index: 1;
+          }
+        }
+        .increment:hover {
+          background-color: #81d4fa;
+        }
+      }
+      .item-quantity {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        color: #FFFFFF;
+        border-radius: 50%;
+        background-color: #FF0000;
+        height: 25px;
+        width: 25px;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: bold;
+      }
       .item-container.active,
       .item-container.active:hover {
         background-color: #e3f2fd;
@@ -74,8 +124,21 @@
   };
   .menu-wrapper {
     margin: 1em 0;
+    position: relative;
+    .count {
+      position: absolute;
+      right: 1em;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.05);
+      height: 24px;
+      width: 24px;
+      text-align: center;
+      font-weight: bold;
+      color: #0d47a1;
+      top: 0.5em
+    }
     .menu-item {
-      padding: 1em;
+      padding: 0.5em;
       cursor: pointer;
       border-radius: 4px;
     }
@@ -103,5 +166,27 @@
   .negative {
     background-color: #ff867c;
     color: #000063;
+  }
+}
+.offuscator {
+  background-color: rgba(0,0,0,0.3);
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  left: 0;
+  .dialog-container {
+    height: auto;
+    margin: auto;
+    .dialog-list {
+      min-height: 200px;
+      overflow: auto;
+      max-height: 600px;
+    }
+    footer {
+      padding-top: 1em;
+    }
   }
 }

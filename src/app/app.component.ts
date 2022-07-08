@@ -21,15 +21,21 @@ export class AppComponent implements OnInit {
 
   public tab: number = 0;
 
+  public showform: boolean = false;
+
   public forms!: FormGroup;
 
-  private itemsAlreadyExist(
+  public cart: any[] = [];
+
+  private itemAlreadyExist(
     items: {
       name: string;
-      quantity: number;}[],
-    name: string): (boolean | {name: string; quantity:number;})
+      quantity: number;
+      category: number
+    }[],
+    name: string): number
   {
-    return items.find((item: { name: string;quantity: number}) => item.name === name) || false;
+    return items.findIndex((item: { name: string;quantity: number; category: number}) => item.name === name);
   }
 
   ngOnInit(): void {
@@ -37,9 +43,34 @@ export class AppComponent implements OnInit {
   }
 
   handleFormReset(): void {
-    this.forms.reset();
+    this.initForm();
     this.price = 0;
     this.tab = 0;
+  }
+  listenMinusEvent($event: string) {
+    const item: any = this.categories[this.tab].recipes.find((recipe: any) => recipe.uuid === $event);
+    const itemName: string = item.title;
+    const itemPrice: number = item.price;
+    const formControlPrice = this.forms.get('price') as FormControl;
+    const formControlItems = this.forms.get('items') as FormArray;
+    const itemExistIndex = this.itemAlreadyExist(formControlItems.value,itemName);
+
+    const previewItem = formControlItems.at(itemExistIndex);
+    const previewQuantity = previewItem.value.quantity;
+
+
+    if(previewQuantity > 0){
+      previewItem.patchValue({
+        quantity: previewQuantity - 1
+      });
+      formControlPrice.setValue(this.price - itemPrice);
+      this.price = formControlPrice.value;
+
+      if(previewItem.value.quantity === 0){
+        formControlItems.removeAt(itemExistIndex);
+      }
+      this.cart = formControlItems.value;
+    }
   }
 
   listenChildEvent($event: string) {
@@ -49,18 +80,37 @@ export class AppComponent implements OnInit {
     const itemQuantity = 1;
     const formControlPrice = this.forms.get('price') as FormControl;
     const formControlItems = this.forms.get('items') as FormArray;
-    const currentPrice = formControlPrice.value;
-    // console.log("// test //", formControlItems);
+    const itemExistIndex = this.itemAlreadyExist(formControlItems.value,itemName);
 
-    formControlItems.push(new FormGroup({
-      name: new FormControl(itemName),
-      quantity: new FormControl(itemQuantity),
-    }));
-    formControlPrice.setValue(currentPrice + (itemQuantity * itemPrice));
+    if(itemExistIndex < 0){
+      formControlItems.push(new FormGroup({
+        name: new FormControl(itemName),
+        quantity: new FormControl(
+          itemQuantity,
+          Validators.compose(
+            [
+              Validators.required,
+              Validators.min(1)
+            ])
+        ),
+        category: new FormControl(this.tab),
+      }));
+      formControlPrice.setValue(this.price + itemPrice);
+    } else {
+      const previewItem = formControlItems.at(itemExistIndex);
+      const previewQuantity = previewItem.value.quantity;
+      previewItem.patchValue({
+        quantity: previewQuantity + 1
+      });
+
+      formControlPrice.setValue(this.price + itemPrice);
+    }
+
     this.price = formControlPrice.value;
+    this.cart = formControlItems.value;
   }
 
-  listenChildTabEvent($event: number) {
+  listenChildTabEvent($event: number): void {
     this.tab = $event;
   }
 
@@ -71,9 +121,14 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onSubmitForm (): void {
+  onSubmitForm(): void {
     // console.log('// Form //', this.forms.value);
-    alert(JSON.stringify(this.forms.value));
+    // alert(JSON.stringify(this.forms.value));
+    this.showform = true;
+  }
+
+  handleDialogClose(): void {
     this.handleFormReset();
+    this.showform = false;
   }
 }

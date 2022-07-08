@@ -7,6 +7,7 @@
     }}
   </em>
   <button
+    [disabled]="!price"
     class="pull-right order-button button {{ price | color }}"
     type="submit"
   >

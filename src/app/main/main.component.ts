@@ -15,10 +15,15 @@ export class MainComponent implements OnInit {
   @Input() public items!: any[];
   @Input() public forms!: FormGroup;
   @Output() itemEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() minusEvent: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void { }
 
   listenChildEvent($event: string) {
     this.itemEvent.emit($event);
+  }
+
+  listenMinusEvent($event: string) {
+    this.minusEvent.emit($event);
   }
 }

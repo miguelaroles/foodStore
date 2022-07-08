@@ -1,5 +1,6 @@
 <div
   (click)="emitEvent()"
+  class="item-container-inner"
 >
   <div class="image-container">
     <img [src]="item.imageUrl | imageUrl" class="image" alt="placeholder">
@@ -12,5 +13,14 @@
       stripToCurrency |
       currency:'CHF ':'symbol':'1.2-2'
     }}
+  </div>
+  <div *ngIf="forms.value | quantity : item.title" class="row count-wrapper">
+    <div (click)="handleMinusClick($event)" class="col-3">
+      <span class="button clear increment"><img height="24" width="24" src="https://icongr.am/feather/minus-circle.svg?size=128&color=currentColor"></span>
+    </div>
+    <div class="col-6 count">{{ forms.value | quantity : item.title }}</div>
+    <div class="col-3">
+      <span class="button clear increment"><img src="https://icongr.am/feather/plus-circle.svg?size=128&color=currentColor"></span>
+    </div>
   </div>
 </div>

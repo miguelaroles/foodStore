@@ -1,3 +1,4 @@
 <div class="row menu-wrapper">
   <div (click)="emitEvent()" [ngClass]="{ active: active}"  class="col-12 menu-item" >{{ category.title }}</div>
+  <div *ngIf="forms.value.items | countCategory : index" class="count">{{ forms.value.items | countCategory : index}}</div>
 </div>

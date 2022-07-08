@@ -12,6 +12,8 @@ import { ImageUrlPipe } from './pipes/image/image-url.pipe';
 import { StripToCurrencyPipe } from './pipes/currency/strip-to-currency.pipe';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ObjectContainsPipe } from './pipes/array/object-contains.pipe';
+import { QuantityPipe } from './pipes/forms/quantity.pipe';
+import { CountCategoryPipe } from './pipes/tab/count-category.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ObjectContainsPipe } from './pipes/array/object-contains.pipe';
     TabComponent,
     ImageUrlPipe,
     StripToCurrencyPipe,
-    ObjectContainsPipe
+    ObjectContainsPipe,
+    QuantityPipe,
+    CountCategoryPipe
   ],
   imports: [
     BrowserModule,

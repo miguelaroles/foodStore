@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() public categories!: any[];
   @Input() public tab!: number;
+  @Input() public forms!: FormGroup;
   @Output() tabEvent: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void { }

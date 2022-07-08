@@ -1,10 +1,12 @@
 <main>
   <form [formGroup]="forms" (ngSubmit)="onSubmitForm()" class="row wrapper">
     <section class="col-3 col-2-md col-2-lg">
+      <h1 class="app-title">{{ title }}</h1>
       <app-navbar
         (tabEvent)="listenChildTabEvent($event)"
         [tab]="tab"
         [categories]="categories"
+        [forms]="forms"
       ></app-navbar>
     </section>
     <section class="col-9 col-10-md col-10-lg">
@@ -12,6 +14,7 @@
         <app-main
           *ngSwitchCase="tab"
           (itemEvent)="listenChildEvent($event)"
+          (minusEvent)="listenMinusEvent($event)"
           [items]="categories[tab].recipes"
           [title]="categories[tab].title"
           [forms]="forms"
@@ -22,4 +25,20 @@
       </div>
     </section>
   </form>
+  <div *ngIf="showform" class="offuscator">
+    <div class="dialog-container is-vertical-align">
+      <div class="card">
+        <header>
+          <h4>Summary</h4>
+        </header>
+        <div class="dialog-list">
+          <div *ngFor="let article of cart" class="dialog-item"><b>{{ article.quantity }}</b> - {{ article.name }}</div>
+        </div>
+        <footer (click)="handleDialogClose()" class="is-right">
+          <a class="button primary">Submit</a>
+          <a class="button">Cancel</a>
+        </footer>
+      </div>
+    </div>
+  </div>
 </main>

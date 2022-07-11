@@ -25,7 +25,7 @@
       </div>
     </section>
   </form>
-  <div *ngIf="showform" class="offuscator">
+  <div *ngIf="showForm" class="offuscator">
     <div class="dialog-container is-vertical-align">
       <div class="card">
         <header>
@@ -34,9 +34,14 @@
         <div class="dialog-list">
           <div *ngFor="let article of cart" class="dialog-item"><b>{{ article.quantity }}</b> - {{ article.name }}</div>
         </div>
-        <footer (click)="handleDialogClose()" class="is-right">
-          <a class="button primary">Submit</a>
-          <a class="button">Cancel</a>
+        <div class="dialog-total">
+          <hr>
+          <b>Total</b>
+          <div class="price-dialog">{{ price | stripToCurrency | currency:'CHF ':'symbol':'1.2-2' }}</div>
+        </div>
+        <footer class="is-right">
+          <a (click)="handleDialogCancel()" class="button">Cancel</a>
+          <a (click)="handleDialogClose()" class="button primary">Submit</a>
         </footer>
       </div>
     </div>

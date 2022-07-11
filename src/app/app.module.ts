@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ObjectContainsPipe } from './pipes/array/object-contains.pipe';
 import { QuantityPipe } from './pipes/forms/quantity.pipe';
 import { CountCategoryPipe } from './pipes/tab/count-category.pipe';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -28,13 +29,14 @@ import { CountCategoryPipe } from './pipes/tab/count-category.pipe';
     StripToCurrencyPipe,
     ObjectContainsPipe,
     QuantityPipe,
-    CountCategoryPipe
+    CountCategoryPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

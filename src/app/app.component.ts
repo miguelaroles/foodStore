@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import DatabaseService from "./services/database.service";
+
 // console.log(data);
 
 @Component({
@@ -10,22 +11,20 @@ import DatabaseService from "./services/database.service";
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    private readonly _service: DatabaseService
-  ) {
-  }
+  constructor(private readonly _service: DatabaseService) { }
 
   @Input() public price: number = 0;
+  public database!: any;
 
-  public title: string = this._service.getDatabase().title;
+  public title: string = '';
 
   public items: any[] = [];
 
-  public categories: any[] = this._service.getDatabase().data;
+  public categories: any[] = [];
 
   public tab: number = 0;
 
-  public showform: boolean = false;
+  public showForm: boolean = false;
 
   public forms!: FormGroup;
 
@@ -42,8 +41,12 @@ export class AppComponent implements OnInit {
     return items.findIndex((item: { name: string;quantity: number; category: number}) => item.name === name);
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.initForm();
+    this.database = await this._service.getDatabase();
+    this.title = this.database?.title;
+    this.categories = this.database?.data;
+    //console.log("/// database ///", this.database);
   }
 
   handleFormReset(): void {
@@ -128,11 +131,14 @@ export class AppComponent implements OnInit {
   onSubmitForm(): void {
     // console.log('// Form //', this.forms.value);
     // alert(JSON.stringify(this.forms.value));
-    this.showform = true;
+    this.showForm = true;
   }
 
   handleDialogClose(): void {
     this.handleFormReset();
-    this.showform = false;
+    this.showForm = false;
+  }
+  handleDialogCancel(): void {
+    this.showForm = false;
   }
 }

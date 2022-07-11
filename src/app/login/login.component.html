@@ -1,0 +1,33 @@
+<div class="login-wrapper row">
+  <div class="col-4 card">
+    <header>
+      <h2>Login</h2>
+    </header>
+    <form [formGroup]="signinForm" (ngSubmit)="submitForm()" class="row">
+      <div class="form-control col-12">
+        <label>
+          <input type="email" placeholder="e-mail" formControlName="email"/>
+        </label>
+        <div [hidden]="signinForm.get('email')!.untouched || !signinForm.get('email')!.hasError('required')" class="error-wrapper">
+          Email is required
+        </div>
+        <div [hidden]="signinForm.get('email')!.untouched || !signinForm.get('email')!.hasError('pattern')" class="error-wrapper">
+          Please enter your email address in format : yourname@example.com
+        </div>
+      </div>
+      <div class="form-control col-12">
+        <label>
+          <input type="password" placeholder="User name" formControlName="password"/>
+        </label>
+        <div [hidden]="signinForm.get('password')!.untouched || !signinForm.get('password')!.hasError('required')" class="error-wrapper">
+          Password is required
+        </div>
+      </div>
+    </form>
+    <footer class="is-right">
+      <button (click)="submitForm()" [disabled]="signinForm.invalid" type="submit" class="button primary">Login</button>
+    </footer>
+  </div>
+  <pre>{{ signinForm.value | json }}</pre>
+  <pre>Is valid : {{ signinForm.valid }}</pre>
+</div>

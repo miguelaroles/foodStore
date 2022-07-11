@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ColorPipe implements PipeTransform {
 
-  transform(value: number, ...args: unknown[]): string {
+  transform(value: number): string {
 
     return value < 0 ? 'error' : 'primary';
   }

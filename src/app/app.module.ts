@@ -15,6 +15,9 @@ import { ObjectContainsPipe } from './pipes/array/object-contains.pipe';
 import { QuantityPipe } from './pipes/forms/quantity.pipe';
 import { CountCategoryPipe } from './pipes/tab/count-category.pipe';
 import { HttpClientModule } from "@angular/common/http";
+import { RestoComponent } from './resto/resto.component';
+import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { HttpClientModule } from "@angular/common/http";
     ObjectContainsPipe,
     QuantityPipe,
     CountCategoryPipe,
+    RestoComponent,
+    LoginComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

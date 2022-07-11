@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import data from "src/assets/files/resto-data.json";
-import {FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
-
+import { FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import DatabaseService from "./services/database.service";
 // console.log(data);
 
 @Component({
@@ -11,13 +10,18 @@ import {FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/fo
 })
 export class AppComponent implements OnInit {
 
+  constructor(
+    private readonly _service: DatabaseService
+  ) {
+  }
+
   @Input() public price: number = 0;
 
-  public title: string = data.title;
+  public title: string = this._service.getDatabase().title;
 
   public items: any[] = [];
 
-  public categories: any[] = data.data;
+  public categories: any[] = this._service.getDatabase().data;
 
   public tab: number = 0;
 

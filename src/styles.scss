@@ -91,6 +91,9 @@
         color: #0d47a1;
         border-left: 4px solid #0d47a1;
         padding-left: 0.5em;
+        display: flex;
+        position: relative;
+        justify-content: space-between;
       }
       .item {
         padding: 0em;

@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { RestoComponent } from './resto/resto.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RestoComponent,
     LoginComponent,
     NotFoundComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

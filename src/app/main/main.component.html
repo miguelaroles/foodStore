@@ -1,5 +1,5 @@
 <div class="row item-wrapper">
-  <h2 class="col-12 title">{{ title }}</h2>
+  <h2 class="col-12 title">{{ title }} <button class="button error is-right" (click)="handleQuit()">Quit</button></h2>
   <span
     class="col-4 col-12-xs col-3-md col-2-lg item item-container"
     *ngFor="let item of items"

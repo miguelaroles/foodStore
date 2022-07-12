@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import data from "src/assets/files/resto-data.json";
 import { HttpClient } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
 
@@ -14,11 +13,23 @@ export default class DatabaseService {
 
   private _isLogged:boolean = false;
   private _user:any = null;
+  private _database: any;
+  private _price: number = 0;
 
   public async getDatabase() {
-    const url = "../../assets/files/resto-data.json";
-    const request = await this._http.get(url);
-    return await firstValueFrom(request);
+    if(this._database){
+      return this._database;
+    } else {
+      const url = "../../assets/files/resto-data.json";
+      const request = await this._http.get(url);
+      const result = await firstValueFrom(request);
+      this._database = result;
+      return result;
+    }
+  }
+
+  public getCategories(): any[] {
+    return this._database.data || [];
   }
 
   public getIsLogged(): boolean {
@@ -35,5 +46,13 @@ export default class DatabaseService {
 
   public setUser(isLogged: any): void {
     this._isLogged = true;
+  }
+
+  public setPrice(price: number): void {
+    this._price = price;
+  }
+
+  public getPrice(): number {
+    return  this._price;
   }
 }

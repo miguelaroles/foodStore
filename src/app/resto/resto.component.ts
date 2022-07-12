@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import DatabaseService from "../services/database.service";
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { FormItemsItems } from "../interface/form-items";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-resto',
@@ -10,9 +11,12 @@ import { FormItemsItems } from "../interface/form-items";
 })
 export class RestoComponent implements OnInit {
 
-  constructor(private readonly _service: DatabaseService) { }
+  constructor(
+    private readonly _service: DatabaseService,
+    private _route: ActivatedRoute
+  ) { }
 
-  public price: number = 0;
+  public price: number = this._service.getPrice();
 
   public database!: any;
 
@@ -39,13 +43,17 @@ export class RestoComponent implements OnInit {
 
   async ngOnInit() {
     this.initForm();
-    this.database = await this._service.getDatabase();
-    this.title = this.database?.title;
-    this.categories = this.database?.data;
+    const data = this._route.snapshot.data['database'];
+    this.database = data;
+    this.title = data.title;
+    this.categories = data?.data;
+    // console.log('// test //',data, {});
   }
 
   handleFormReset(): void {
     this.initForm();
+    // this.price = 0;
+    this._service.setPrice(0);
     this.price = 0;
     this.tab = 0;
   }
@@ -65,7 +73,8 @@ export class RestoComponent implements OnInit {
       previewItem.patchValue({
         quantity: previewQuantity - 1
       });
-      formControlPrice.setValue(this.price - itemPrice);
+      formControlPrice.setValue(this._service.getPrice() - itemPrice);
+      this._service.setPrice(formControlPrice.value);
       this.price = formControlPrice.value;
 
       if(previewItem.value.quantity === 0){
@@ -97,7 +106,7 @@ export class RestoComponent implements OnInit {
         ),
         category: new FormControl(this.tab),
       }));
-      formControlPrice.setValue(this.price + itemPrice);
+      formControlPrice.setValue(this._service.getPrice() + itemPrice);
     } else {
       const previewItem = formControlItems.at(itemExistIndex);
       const previewQuantity = previewItem.value.quantity;
@@ -105,9 +114,10 @@ export class RestoComponent implements OnInit {
         quantity: previewQuantity + 1
       });
 
-      formControlPrice.setValue(this.price + itemPrice);
+      formControlPrice.setValue(this._service.getPrice() + itemPrice);
     }
 
+    this._service.setPrice(formControlPrice.value);
     this.price = formControlPrice.value;
     this.cart = formControlItems.value;
   }
@@ -121,6 +131,8 @@ export class RestoComponent implements OnInit {
       price: new FormControl(0, Validators.compose([Validators.required])),
       items: new FormArray([])
     });
+    this._service.setPrice(0);
+    this.price = 0;
   }
 
   onSubmitForm(): void {

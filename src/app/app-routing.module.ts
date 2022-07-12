@@ -5,6 +5,8 @@ import { RestoComponent } from "./resto/resto.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
 import { ProductResolver } from "./product.resolver";
+import { LoginGuard } from "./login.guard";
+import { ForbiddenComponent } from "./forbidden/forbidden.component";
 
 const routes: Routes = [
   {
@@ -13,17 +15,22 @@ const routes: Routes = [
   {
     path: 'resto',
     component: RestoComponent,
+    canActivate: [LoginGuard],
     resolve: {
       database: ProductResolver
-    }
+    },
   },
   {
     path: 'detail/:id',
     component: ProductDetailComponent
   },
   {
+    path: 'forbidden',
+    component: ForbiddenComponent
+  },
+  {
     path: '',
-    component: LoginComponent,
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {

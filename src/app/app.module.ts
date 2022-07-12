@@ -19,6 +19,7 @@ import { RestoComponent } from './resto/resto.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     LoginComponent,
     NotFoundComponent,
     ProductDetailComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

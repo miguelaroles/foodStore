@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import DatabaseService from "../services/database.service";
 
 
 @Component({
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class MainComponent implements OnInit {
 
-  constructor( private router : Router ) { }
+  constructor( private router : Router, private readonly _services: DatabaseService ) { }
 
   @Input() public title!: string;
   @Input() public items!: any[];
@@ -29,6 +30,7 @@ export class MainComponent implements OnInit {
   }
 
   handleQuit() {
+    this._services.setUser(null);
     this.router.navigate(['']).then(() => {});
   }
 }

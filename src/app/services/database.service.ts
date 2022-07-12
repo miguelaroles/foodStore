@@ -44,8 +44,8 @@ export default class DatabaseService {
     return this._user;
   }
 
-  public setUser(isLogged: any): void {
-    this._isLogged = true;
+  public setUser(isLogged: {id: string;username: string} | null): void {
+    this._user = isLogged;
   }
 
   public setPrice(price: number): void {

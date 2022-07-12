@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import DatabaseService from "../services/database.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,10 @@ export class LoginComponent implements OnInit {
 
   public signinForm: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(
+    private _router: Router,
+    private _services: DatabaseService
+  ) {
     this.signinForm = new FormGroup<any>({
       email: new FormControl('', Validators.compose([
         Validators.email,
@@ -32,7 +36,12 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void{
     if(this.signinForm.valid){
-      this.router.navigate(['resto']);
+      this._services.setUser({
+        id: 'fabd83d3-e1b7-42a4-bf1f-9659e06144db',
+        username: 'admin'
+      });
+
+      this._router.navigate(['resto']);
     }
   }
 

@@ -16,11 +16,15 @@
   </div>
   <div *ngIf="forms.value | quantity : item.title" class="row count-wrapper">
     <div (click)="handleMinusClick($event)" class="col-3">
-      <span class="button clear increment"><img height="24" width="24" src="https://icongr.am/feather/minus-circle.svg?size=128&color=currentColor"></span>
+      <span class="button clear increment">
+        <img height="24" width="24" src="https://icongr.am/feather/minus-circle.svg?size=128&color=currentColor" alt="minus">
+      </span>
     </div>
     <div class="col-6 count">{{ forms.value | quantity : item.title }}</div>
     <div class="col-3">
-      <span class="button clear increment"><img src="https://icongr.am/feather/plus-circle.svg?size=128&color=currentColor"></span>
+      <span class="button clear increment">
+        <img src="https://icongr.am/feather/plus-circle.svg?size=128&color=currentColor" alt="plus">
+      </span>
     </div>
   </div>
   <div [hidden]="true" [routerLink]="['/detail',item.uuid]" class="detail-link">Details</div>

@@ -1,7 +1,7 @@
 <div>
-  <form [formGroup]="forms" (ngSubmit)="onSubmitForm()" class="row wrapper">
-    <section class="col-3 col-2-md col-2-lg">
-      <h1 class="app-title">{{ title }}</h1>
+  <form [formGroup]="forms" (ngSubmit)="onSubmitForm()">
+    <section>
+      <h1>{{ title }}</h1>
       <app-navbar
         (tabEvent)="listenChildTabEvent($event)"
         [tab]="tab"
@@ -9,8 +9,8 @@
         [forms]="forms"
       ></app-navbar>
     </section>
-    <section class="col-9 col-10-md col-10-lg">
-      <div [ngSwitch]="tab" class="main-wrapper">
+    <section>
+      <div [ngSwitch]="tab">
         <app-main
           *ngSwitchCase="tab"
           (itemEvent)="listenChildEvent($event)"
@@ -20,28 +20,28 @@
           [forms]="forms"
         ></app-main>
       </div>
-      <div class="order-wrapper">
+      <div>
         <app-order [price]="price"></app-order>
       </div>
     </section>
   </form>
-  <div *ngIf="showForm" class="offuscator">
-    <div class="dialog-container is-vertical-align">
-      <div class="card">
+  <div *ngIf="showForm">
+    <div>
+      <div>
         <header>
           <h4>Summary</h4>
         </header>
-        <div class="dialog-list">
-          <div *ngFor="let article of cart" class="dialog-item"><b>{{ article.quantity }}</b> - {{ article.name }}</div>
+        <div>
+          <div *ngFor="let article of cart"><b>{{ article.quantity }}</b> - {{ article.name }}</div>
         </div>
-        <div class="dialog-total">
+        <div>
           <hr>
           <b>Total</b>
-          <div class="price-dialog">{{ price | stripToCurrency | currency:'CHF ':'symbol':'1.2-2' }}</div>
+          <div>{{ price | stripToCurrency | currency:'CHF ':'symbol':'1.2-2' }}</div>
         </div>
-        <footer class="is-right">
-          <a (click)="handleDialogCancel()" class="button">Cancel</a>
-          <a (click)="handleDialogClose()" class="button primary">Submit</a>
+        <footer>
+          <a (click)="handleDialogCancel()">Cancel</a>
+          <a (click)="handleDialogClose()">Submit</a>
         </footer>
       </div>
     </div>

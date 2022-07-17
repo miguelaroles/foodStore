@@ -1,14 +1,13 @@
 <footer>
   <hr/>
-  <em
-    class="price">{{
+  <em>{{
       price | stripToCurrency |
       currency:'CHF ':'symbol':'1.2-2'
     }}
   </em>
   <button
     [disabled]="!price"
-    class="pull-right order-button button {{ price | color }}"
+    class="{{ price | color }}"
     type="submit"
   >
     Order

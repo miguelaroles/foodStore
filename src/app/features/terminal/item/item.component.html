@@ -1,31 +1,30 @@
 <div
   (click)="emitEvent()"
-  class="item-container-inner"
 >
-  <div class="image-container">
-    <img [src]="item.imageUrl | imageUrl" class="image" alt="placeholder">
+  <div>
+    <img [src]="item.imageUrl | imageUrl" alt="placeholder">
   </div>
-  <div class="item-value">{{ item.title }}</div>
-  <div class="item-description">{{ item.description }}</div>
-  <div class="item-price {{ item.price | color }}">
+  <div>{{ item.title }}</div>
+  <div>{{ item.description }}</div>
+  <div class="{{ item.price | color }}">
     {{
       item.price |
       stripToCurrency |
       currency:'CHF ':'symbol':'1.2-2'
     }}
   </div>
-  <div *ngIf="forms.value | quantity : item.title" class="row count-wrapper">
-    <div (click)="handleMinusClick($event)" class="col-3">
-      <span class="button clear increment">
+  <div *ngIf="forms.value | quantity : item.title">
+    <div (click)="handleMinusClick($event)">
+      <span>
         <img height="24" width="24" src="https://icongr.am/feather/minus-circle.svg?size=128&color=currentColor" alt="minus">
       </span>
     </div>
-    <div class="col-6 count">{{ forms.value | quantity : item.title }}</div>
-    <div class="col-3">
-      <span class="button clear increment">
-        <img src="https://icongr.am/feather/plus-circle.svg?size=128&color=currentColor" alt="plus">
+    <div>{{ forms.value | quantity : item.title }}</div>
+    <div>
+      <span>
+        <img height="24" width="24" src="https://icongr.am/feather/plus-circle.svg?size=128&color=currentColor" alt="plus">
       </span>
     </div>
   </div>
-  <div [hidden]="true" [routerLink]="['/detail',item.uuid]" class="detail-link">Details</div>
+  <div [hidden]="true" [routerLink]="['/detail',item.uuid]">Details</div>
 </div>

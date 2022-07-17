@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FormItems } from "../../interface/form-items"
+import { FormItems } from "../../../../interfaces/form-items"
 
 @Pipe({
   name: 'quantity'

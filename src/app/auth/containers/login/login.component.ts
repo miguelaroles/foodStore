@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import DatabaseService from "../services/database.service";
+import DatabaseService from "../../../features/terminal/services/database.service";
 
 @Component({
   selector: 'app-login',
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         username: 'admin'
       });
 
-      this._router.navigate(['resto']);
+      this._router.navigate(['terminal']);
     }
   }
 

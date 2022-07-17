@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import DatabaseService from "../services/database.service";
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { FormItemsItems } from "../interface/form-items";
+import { FormItemsItems } from "../../../interfaces/form-items";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

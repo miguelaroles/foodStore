@@ -4,7 +4,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import DatabaseService from "./services/database.service";
+import DatabaseService from "../services/database.service";
 
 @Injectable({
   providedIn: 'root'

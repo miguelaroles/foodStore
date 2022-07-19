@@ -1,0 +1,52 @@
+:root {
+  --ion-background-color: rgba(0,0,0,0.8);
+  --ion-text-color: #aaaaaa;
+}
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+.full-height-bg-color {
+  height: 100vh;
+  background-color: #3880ff;
+}
+.full-height {
+  height: 100vh;
+  position: relative;
+}
+.split-pane {
+  --side-max-width: 200px;
+}
+.full-height-container {
+  height: calc(100vh - 8em);
+}
+.avatar {
+  width: 6em;
+  height: 6em;
+}
+.avatar-center {
+  margin-right: auto;
+  margin-left: auto;
+}
+.order-button {
+  --ion-text-color: #000000 !important;
+  height: 5em !important;
+}
+.badge {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
+.tab {
+  overflow-y: auto;
+}
+
+.order-footer {
+  height: 10em !important;
+}
+
+.active {
+  background-color: rgba(255,255,255,0.05);
+  --ion-background-color: rgba(255,255,255,0.05);
+}

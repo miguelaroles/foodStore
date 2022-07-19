@@ -20,6 +20,7 @@ import { LoginComponent } from './auth/containers/login/login.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { ProductDetailComponent } from './features/terminal/product-detail/product-detail.component';
 import { ForbiddenComponent } from './features/forbidden/forbidden.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ForbiddenComponent } from './features/forbidden/forbidden.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    IonicModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

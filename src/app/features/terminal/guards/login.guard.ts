@@ -14,9 +14,10 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const isAllowed = !!this._services.getUser();
 
-    if(!isAllowed){ this._router.navigate(['forbidden']) }
+    // if(!isAllowed){ this._router.navigate(['forbidden']) }
 
-    return isAllowed;
+    // return isAllowed;
+    return true;
   }
 
 }

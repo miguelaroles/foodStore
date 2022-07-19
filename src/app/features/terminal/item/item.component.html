@@ -1,19 +1,21 @@
 <div
+  class="ion-justify-content-center ion-activatable ripple-parent"
   (click)="emitEvent()"
 >
-  <div>
-    <img height="200" width="350" [src]="item.imageUrl | imageUrl" alt="placeholder">
-  </div>
-  <div>{{ item.title }}</div>
-  <div>{{ item.description }}</div>
-  <div class="{{ item.price | color }}">
+  <ion-avatar class="avatar avatar-center">
+    <img [src]="item.imageUrl | imageUrl" alt="placeholder" />
+  </ion-avatar>
+  <div class="ion-text-center ion-margin-top">{{ item.title }}</div>
+  <div [hidden]="true" class="ion-text-center">{{ item.description }}</div>
+  <div class="ion-text-center {{ item.price | color }} ion-margin-top">
     {{
       item.price |
       stripToCurrency |
       currency:'CHF ':'symbol':'1.2-2'
     }}
   </div>
-  <div *ngIf="forms.value | quantity : item.title">
+  <ion-badge class="badge" *ngIf="forms.value | quantity : item.title" color="danger">{{ forms.value | quantity : item.title }}</ion-badge>
+  <div [hidden]="true" *ngIf="forms.value | quantity : item.title">
     <div (click)="handleMinusClick($event)">
       <span>
         <img height="24" width="24" src="https://icongr.am/feather/minus-circle.svg?size=128&color=currentColor" alt="minus">
@@ -27,4 +29,5 @@
     </div>
   </div>
   <div [hidden]="true" [routerLink]="['/detail',item.uuid]">Details</div>
+  <ion-ripple-effect></ion-ripple-effect>
 </div>

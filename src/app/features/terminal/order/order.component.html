@@ -1,15 +1,22 @@
-<footer>
-  <hr/>
-  <em>{{
-      price | stripToCurrency |
-      currency:'CHF ':'symbol':'1.2-2'
-    }}
-  </em>
-  <button
-    [disabled]="!price"
-    class="{{ price | color }}"
-    type="submit"
-  >
-    Order
-  </button>
+<footer class="ion-no-margin ion-no-padding">
+  <ion-grid class="ion-no-padding ion-no-margin">
+    <ion-row>
+      <ion-col size="12">
+        <ion-button
+          [disabled]="!price"
+          class="order-button"
+          type="submit"
+          color="{{ price | color }}"
+          expand="full"
+        >
+          <ion-text class="ion-margin-end">Order</ion-text> <em>{{
+          price | stripToCurrency |
+            currency:'CHF':'symbol':'1.2-2'
+          }}
+        </em>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </footer>
+

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
-import {LoginComponent} from "./containers/login/login.component";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginComponent } from "./containers/login/login.component";
+import { IonicModule } from "@ionic/angular";
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IonicModule
   ]
 })
 export class AuthModule { }

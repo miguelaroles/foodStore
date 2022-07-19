@@ -1,16 +1,24 @@
 <div>
-  <h2>{{ title }} <button (click)="handleQuit()">Quit</button></h2>
-  <span
-    *ngFor="let item of items"
-    [class]="{
-    active: forms.value.items | objectContains : item.title
-  }"
-  >
-    <app-item
-      (itemEvent)="listenChildEvent($event)"
-      (minusEvent)="listenMinusEvent($event)"
-      [item]="item"
-      [forms]="forms"
-    ></app-item>
-  </span>
+  <h2 class="ion-padding-horizontal">
+    <span>{{ title }}</span>
+    <ion-button color="danger" class="ion-float-right" (click)="handleQuit()">Quit</ion-button>
+  </h2>
+  <ion-grid class="full-height-container">
+    <ion-row>
+      <ion-col
+        size="3"
+        *ngFor="let item of items"
+        [class]="{
+      active: forms.value.items | objectContains : item.title
+    }"
+      >
+        <app-item
+          (itemEvent)="listenChildEvent($event)"
+          (minusEvent)="listenMinusEvent($event)"
+          [item]="item"
+          [forms]="forms"
+        ></app-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </div>

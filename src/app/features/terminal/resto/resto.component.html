@@ -1,49 +1,59 @@
-<div>
-  <form [formGroup]="forms" (ngSubmit)="onSubmitForm()">
-    <section>
-      <h1>{{ title }}</h1>
-      <app-navbar
-        (tabEvent)="listenChildTabEvent($event)"
-        [tab]="tab"
-        [categories]="categories"
-        [forms]="forms"
-      ></app-navbar>
-    </section>
-    <section>
-      <div [ngSwitch]="tab">
-        <app-main
-          *ngSwitchCase="tab"
-          (itemEvent)="listenChildEvent($event)"
-          (minusEvent)="listenMinusEvent($event)"
-          [items]="categories[tab]?.recipes"
-          [title]="categories[tab]?.title"
-          [forms]="forms"
-        ></app-main>
-      </div>
-      <div>
-        <app-order [price]="price"></app-order>
-      </div>
-    </section>
-  </form>
-  <div *ngIf="showForm">
-    <div>
-      <div>
-        <header>
-          <h4>Summary</h4>
-        </header>
-        <div>
-          <div *ngFor="let article of cart"><b>{{ article.quantity }}</b> - {{ article.name }}</div>
+<ion-content class="content">
+  <ion-split-pane when="md" class="split-pane" contentId="main">
+    <!--  the side menu  -->
+    <ion-menu contentId="main">
+      <ion-header>
+        <ion-list class="full-height">
+          <app-navbar
+            (tabEvent)="listenChildTabEvent($event)"
+            [tab]="tab"
+            [categories]="categories"
+            [forms]="forms"
+          ></app-navbar>
+        </ion-list>
+      </ion-header>
+    </ion-menu>
+
+    <!-- the main content -->
+    <section id="main" class="full-height">
+      <form class="ion-no-margin ion-no-padding" [formGroup]="forms" (ngSubmit)="onSubmitForm()">
+        <div class="tab" [ngSwitch]="tab">
+          <app-main
+            *ngSwitchCase="tab"
+            (itemEvent)="listenChildEvent($event)"
+            (minusEvent)="listenMinusEvent($event)"
+            [items]="categories[tab]?.recipes"
+            [title]="categories[tab]?.title"
+            [forms]="forms"
+          ></app-main>
         </div>
         <div>
-          <hr>
-          <b>Total</b>
-          <div>{{ price | stripToCurrency | currency:'CHF ':'symbol':'1.2-2' }}</div>
+          <app-order [price]="price"></app-order>
         </div>
-        <footer>
-          <a (click)="handleDialogCancel()">Cancel</a>
-          <a (click)="handleDialogClose()">Submit</a>
-        </footer>
+      </form>
+    </section>
+  </ion-split-pane>
+  <div>
+    <div *ngIf="showForm">
+      <div>
+        <div>
+          <header>
+            <h4>Summary</h4>
+          </header>
+          <div>
+            <div *ngFor="let article of cart"><b>{{ article.quantity }}</b> - {{ article.name }}</div>
+          </div>
+          <div>
+            <hr>
+            <b>Total</b>
+            <div>{{ price | stripToCurrency | currency:'CHF ':'symbol':'1.2-2' }}</div>
+          </div>
+          <footer>
+            <a (click)="handleDialogCancel()">Cancel</a>
+            <a (click)="handleDialogClose()">Submit</a>
+          </footer>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ion-content>

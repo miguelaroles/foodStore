@@ -1,4 +1,13 @@
-<div>
-  <div (click)="emitEvent()" [ngClass]="{ active: active}">{{ category.title }}</div>
-  <div *ngIf="forms.value.items | countCategory : index">{{ forms.value.items | countCategory : index}}</div>
-</div>
+<ion-item class="ion-activatable ripple-parent {{ active ? 'active' : '' }}" lines="none">
+  <ion-grid>
+    <ion-row>
+      <ion-col (click)="emitEvent()" size="11">
+        <ion-text class="ion-text-capitalize">{{ category.title }}</ion-text>
+      </ion-col>
+      <ion-col *ngIf="forms.value.items | countCategory : index" size="1">
+        <ion-badge color="light">{{ forms.value.items | countCategory : index}}</ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-ripple-effect></ion-ripple-effect>
+</ion-item>

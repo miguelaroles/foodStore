@@ -7,7 +7,7 @@ export class ColorPipe implements PipeTransform {
 
   transform(value: number): string {
 
-    return value < 0 ? 'error' : 'primary';
+    return (parseInt(`${value}`) <= 0) ? 'danger' : 'success';
   }
 
 }
